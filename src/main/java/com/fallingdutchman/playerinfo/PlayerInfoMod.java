@@ -1,9 +1,9 @@
-package com.fallingdutchman.playerlist2;
+package com.fallingdutchman.playerinfo;
 
-import com.fallingdutchman.playerlist2.Proxy.CommonProxy;
-import com.fallingdutchman.playerlist2.References.References;
+import com.fallingdutchman.playerinfo.Proxy.IProxy;
+import com.fallingdutchman.playerinfo.References.References;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.*;
+import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLModDisabledEvent;
@@ -15,14 +15,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * Created by Douwe Koopmans on 18-12-15.
  */
 @Mod(modid = References.MOD_ID, name = References.MOD_NAME, version = References.MOD_VERSION,
-        acceptedMinecraftVersions = "1.8", clientSideOnly = true, canBeDeactivated = true)
-public class PlayerList2 {
-
-    @Instance(References.MOD_ID)
-    public PlayerList2 instance;
-
+        acceptedMinecraftVersions = References.MC_VERSIONS, clientSideOnly = true, canBeDeactivated = true)
+public class PlayerInfoMod {
     @SidedProxy(clientSide = References.CLIENT_PROXY_CLASS, serverSide = References.SERVER_PROXY_CLASS)
-    public CommonProxy proxy;
+    private static IProxy proxy;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -41,6 +37,7 @@ public class PlayerList2 {
 
     @SubscribeEvent
     public void deactivated(FMLModDisabledEvent event) {
-        PlayerListCore.getInstance().enabled = false;
+        PlayerInfoCore.getInstance().getLogger().warn("the %s");
+        PlayerInfoCore.getInstance().enabled = false;
     }
 }

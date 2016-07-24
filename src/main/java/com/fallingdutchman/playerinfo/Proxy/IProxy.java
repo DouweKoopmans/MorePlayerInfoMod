@@ -1,4 +1,4 @@
-package com.fallingdutchman.playerlist2.Proxy;
+package com.fallingdutchman.playerinfo.Proxy;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;

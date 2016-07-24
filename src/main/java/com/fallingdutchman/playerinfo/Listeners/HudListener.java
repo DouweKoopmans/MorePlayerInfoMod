@@ -1,6 +1,6 @@
-package com.fallingdutchman.playerlist2.Listeners;
+package com.fallingdutchman.playerinfo.Listeners;
 
-import com.fallingdutchman.playerlist2.PlayerListCore;
+import com.fallingdutchman.playerinfo.PlayerInfoCore;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -15,13 +15,11 @@ import org.lwjgl.input.Mouse;
 public class HudListener {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void hudListener(RenderGameOverlayEvent event)
-    {
+    public void hudListener(RenderGameOverlayEvent.Pre event) {
         if (event.type == RenderGameOverlayEvent.ElementType.PLAYER_LIST) {
             event.setCanceled(true);
         }
-
-        PlayerListCore.getInstance().onPlayerListDraw();
+        PlayerInfoCore.getInstance().renderPlayerList();
     }
 
 
@@ -29,7 +27,7 @@ public class HudListener {
     public void rightClickPlayerList(GuiScreenEvent.MouseInputEvent.Post event) {
         if (event.gui == null && Mouse.isButtonDown(1)
                 && Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindPlayerList.getKeyCode())) {
-            PlayerListCore.getInstance().openGui();
+//            PlayerInfoCore.getInstance().renderPlayerList();
         }
     }
 }
